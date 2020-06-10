@@ -40,6 +40,14 @@ class UsersController < ApplicationController
     end
   end
   
+  def destroy
+    @user = User.find(params[:id])
+    @user.delete
+    reset_session
+    flash[:notice] = "アカウントを削除しました"
+    redirect_to root_url
+  end  
+  
 private
 
     def user_params
