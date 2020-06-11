@@ -1,0 +1,11 @@
+<h1>Sugisutagram</h1>
+
+<p>こんにちは<%= @user.name %></p>
+
+<p>
+  Sugisutagramへようこそ！以下をクリックしてアカウントの認証を行ってください:
+
+</p>
+
+<%= link_to "Activate", edit_account_activation_url(@user.activation_token,
+            email:@user.email) %> 
