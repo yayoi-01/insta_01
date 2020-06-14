@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :logged_in_user, only: [:index, :edit, :update ,:destroy]
   before_action :correct_user,   only: [:edit, :update]
   
   def index
@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
 
   def new
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-  
+
   def destroy
     @user = User.find(params[:id])
     @user.delete
@@ -47,20 +48,11 @@ class UsersController < ApplicationController
     flash[:notice] = "アカウントを削除しました"
     redirect_to root_url
   end  
-  
 private
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation)
-    end
- # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
     end
 
     # 正しいユーザーかどうか確認
