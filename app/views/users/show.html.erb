@@ -18,10 +18,9 @@
        <h3>Microposts (<%= @user.microposts.count %>)</h3>
        <% @microposts.each do |micropost| %>
         <div class="col-sm-4">  
-        
          <%= render 'microposts/model', micropost: micropost %>
         </div>
-      <% end %>  
+       <% end %>  
       <%= will_paginate @microposts %>
     <% end %>
  
