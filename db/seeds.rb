@@ -1,10 +1,11 @@
 # メインのサンプルユーザーを1人作成する
 User.create!(name:  "Example User",
-             email: "example@railstutorial.org",
-             password:              "foobar",
-             password_confirmation: "foobar",
-             activated: true,
-            activated_at: Time.zone.now)
+    email: "example@railstutorial.org",
+    password:              "foobar",
+    password_confirmation: "foobar",
+    activated: true,
+    activated_at: Time.zone.now)
+    
 # 追加のユーザーをまとめて生成する
 99.times do |n|
   name  = Faker::Name.name
@@ -22,7 +23,7 @@ end
 users = User.order(:created_at).take(6)
 50.times do
   content = Faker::Lorem.sentence(word_count: 5)
-  users.avatar.attach(io: File.open("/app/assets/images/p602.jpg"),filename: "p602.jpg", content_type: "image/jpg")
+  users.image.attach(io: File.open('/app/assets/images/p602.jpg'), filename: 'p602.jpg')
   users.each{ |user| user.microposts.create!(content:content) }
 end  
 

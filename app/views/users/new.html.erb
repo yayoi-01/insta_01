@@ -8,16 +8,29 @@
 
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
+      
+      <%= f.label :user　Name %>
+      <%= f.text_field :user　Name, class: 'form-control' %>
+
 
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
+      
+      <%= f.label :profile %>
+      <%= f.text_area :profile,  class: 'form-control' %> 
 
       <%= f.label :password %>
       <%= f.password_field :password, class: 'form-control' %>
 
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation, class: 'form-control' %>
-
+      
+       <%= f.label :tel %>
+       <%= f.text_field :tel, class: 'form-control' %>
+       
+       <%= f.label :gender %>
+      <%= f.select :faculty, [["男"], ["女"]], include_blank: "選択して下さい" %>
+      
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
   </div>
