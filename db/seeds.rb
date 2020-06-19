@@ -24,7 +24,6 @@ users = User.order(:created_at).take(6)
   content = Faker::Lorem.sentence(word_count: 5)
   users.avatar.attach(io: File.open("/app/assets/images/p602.jpg"),filename: "p602.jpg", content_type: "image/jpg")
   users.each{ |user| user.microposts.create!(content:content) }
-  
 end  
 
 # 以下のリレーションシップを作成する
