@@ -13,6 +13,9 @@ class User < ApplicationRecord
   before_save   :downcase_email
   before_create :create_activation_digest
   
+  scope :search_by_keyword, -> (keyword) {
+    where("users.name LIKE :keyword", keyword: "%#{sanitize_sql_like(keyword)}%") if keyword.present?
+  }
   validates :name, presence: true,
                     length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -27,6 +30,14 @@ class User < ApplicationRecord
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST:
           BCrypt::Engine.cost
     BCrypt::Password.create(string,cost:cost)
+  end
+  
+  def self.search(search) #self.でクラスメソッドとしている
+    if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
+      Project.where(['name LIKE ?', "%#{search}%"])
+    else
+      Project.all #全て表示。
+    end
   end
   
   # ランダムなトークンを返す
