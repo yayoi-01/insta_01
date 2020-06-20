@@ -12,4 +12,7 @@ class Micropost < ApplicationRecord
   def display_image
     image.variant({resize:"300x300^",crop:"300x300+0+0",gravity: :center})
   end  
+  
+  
+  
 end

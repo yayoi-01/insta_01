@@ -1,29 +1,32 @@
 <%= form_with(model: @user, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name %>
+  <%= f.label :name,"ユーザーネーム"  %>
   <%= f.text_field :name, class: 'form-control' %>
   
-  <%= f.label :user　Name %>
-  <%= f.text_field :user　Name, class: 'form-control' %>
+  <%= f.label :user_name, "名前" %>
+  <%= f.text_field :user_name, class: 'form-control' %>
 
-  <%= f.label :email %>
+  <%= f.label :email,"メールアドレス" %>
   <%= f.email_field :email, class: 'form-control' %>
   
-  <%= f.label :profile %>
+  <%= f.label :profile, "プロフィール" %>
   <%= f.text_area :profile,  class: 'form-control' %> 
+  
+  <%= f.label :web_url, "webサイト" %>
+  <%= f.text_field :web_url, class: 'form-control' %>
 
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
 
-  <%= f.label :password_confirmation %>
+  <%= f.label :password_confirmation, "Password確認" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   
-  <%= f.label :tel %>
+  <%= f.label :tel, "電話番号" %>
   <%= f.text_field :tel, class: 'form-control' %>
        
-  <%= f.label :gender %>
-  <%= f.select :faculty, [["男"], ["女"]], include_blank: "選択して下さい" %>
+  <%= f.label :gender, "性別" %>
+  <%= f.select :gender, [["男"], ["女"]], include_blank: "選択して下さい" %>
   
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
