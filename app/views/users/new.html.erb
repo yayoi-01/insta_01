@@ -15,11 +15,6 @@
   <%= f.label :email,"メールアドレス" %>
   <%= f.email_field :email, class: 'form-control' %>
   
-  <%= f.label :profile, "プロフィール" %>
-  <%= f.text_area :profile,  class: 'form-control' %> 
-    
-  <%= f.label :web_url, "webサイト" %>
-  <%= f.text_field :web_url, class: 'form-control' %>
 
   <%= f.label :password %>
   <%= f.password_field :password, class: 'form-control' %>
@@ -27,11 +22,7 @@
   <%= f.label :password_confirmation, "Password確認" %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
   
-  <%= f.label :tel, "電話番号" %>
-  <%= f.text_field :tel, class: 'form-control' %>
-       
-  <%= f.label :gender, "性別" %>
-  <%= f.select :gender, [["男"], ["女"]], include_blank: "選択して下さい" %>
+  <%= link_to "利用規約はこちら", "/about" %>
       
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
