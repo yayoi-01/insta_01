@@ -25,23 +25,23 @@ User.create!(name:  "Example User",
             web_url: "https://testtest")
 end
 
-# ユーザーの一部を対象にマイクロポストを生成する
-users = User.order(:created_at).take(6)
-50.times do
-  content = Faker::Lorem.sentence(word_count: 5)
-  users.each{ |user| user.microposts.create!(content:content) }
-end  
-
+# #ユーザーの一部を対象にマイクロポストを生成する
 # users = User.order(:created_at).take(6)
 # 50.times do
-#     content = Faker::Lorem.sentence(word_count: 5)
-#     users.each do |user|
-#     user.microposts.create!(content:content, 
-#     image:micropost.image.attach(io: File.open('app/assets/images/p602.jpg'), filename: 'p602.jpg') )
-    
-#   end
-# end
+#   content = Faker::Lorem.sentence(word_count: 5)
+#   users.each{ |user| user.microposts.create!(content:content) }
+# end  
 
+users = User.order(:created_at).take(6)
+6.times do
+    content = Faker::Lorem.sentence(word_count: 5)
+    users.each do |user|
+    user.microposts.each do |micropost|
+    user.microposts.create!(content:content)
+    micropost.image.create!(micropost.image.attach(io: File.open('app/assets/images/p602.jpg'), filename: 'p602.jpg' ) )
+    end
+  end
+end
 
 
 # 以下のリレーションシップを作成する
