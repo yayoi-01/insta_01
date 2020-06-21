@@ -36,9 +36,10 @@ users = User.order(:created_at).take(6)
 6.times do
     content = Faker::Lorem.sentence(word_count: 5)
     users.each do |user|
-    user.microposts.each do |micropost|
     user.microposts.create!(content:content)
+    user.microposts.each do |micropost|
     micropost.image.create!(micropost.image.attach(io: File.open('app/assets/images/p602.jpg'), filename: 'p602.jpg' ) )
+    micropost.save!
     end
   end
 end
