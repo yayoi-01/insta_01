@@ -6,18 +6,25 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
-    </section>
   </aside>
-  <div class="col-md-8">
-    <% if @user.microposts.any? %>
-      <h3>Microposts (<%= @user.microposts.count %>)</h3>
-      
+    <p><strong>自己紹介</strong></p>    
+        <p><%= @user.profile %></p>
+        <p><strong>Webサイト</strong></p>    
+        <p><%= @user.web_url %></p>
+    </section>
+       <section class="stats">
+        <strong><%= render 'shared/stats' %></strong>  
+      </section>
+  </div>
+    <div class="col-md-8">
+      <% if @user.microposts.any? %>
+    </div>    
+       <h3>Microposts (<%= @user.microposts.count %>)</h3>
        <% @microposts.each do |micropost| %>
-          <ol class="col-sm-4">  
-           <%= render @microposts %>
-          </ol>
+        <div class="col-sm-4">  
+         <%= render 'microposts/model', micropost: micropost %>
+      </div>
       <% end %>  
       <%= will_paginate @microposts %>
     <% end %>
-  </div>
-</div>
+ 

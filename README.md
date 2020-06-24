@@ -1,24 +1,33 @@
-# README
+お世話になります。
+未実装の箇所が複数点ありますが２週間を過ぎてしまった為
+提出させていただきます。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+ー未実装ー
+・facebookログイン機能
+・画像のモーダル表示
+・コメント入力
+・通知機能
+・画像投稿ページ
 
-* Ruby version
+ー自分が苦労した点ー
+ほとんどの機能をチュートリアルやWebサイトをみないと実装できませんでした。
+基礎的なところがあやふやなところが多く
+どうして動くのか理解するまでに時間がかかることが多かったです。
+またエラーなどに慣れるのも時間がかかりseedに画像を入れ込むのは４日頭を悩ませてしまいました。
 
-* System dependencies
 
-* Configuration
 
-* Database creation
 
-* Database initialization
+ー学んだ点ー
+チュートリアルを進めている時より基礎が理解できました。
+特にパーシャルやバリデーションは理解が深まりました。
+何が分からないのかわかるようになりました。
+大まかなアプリ作成の流れを知ることができました。
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
-
-* ...
+ー自慢したい・相談したい点ー
+想像以上に理解できておらずもう少し基礎を学び直したいと思いました。
+本課題についていけるか不安ですが精一杯頑張りたいと思います。
+よろしくお願いします。

@@ -1,10 +1,22 @@
 class User < ApplicationRecord
-  has_many :microposts, :dependent => :destroy
-  
+  has_many :microposts, dependent: :destroy
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
+                                   dependent:   :destroy
+  has_many :following, through: :active_relationships,  source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :likes, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save :downcase_email
+  before_save   :downcase_email
   before_create :create_activation_digest
   
+  scope :search_by_keyword, -> (keyword) {
+    where("users.name LIKE :keyword", keyword: "%#{sanitize_sql_like(keyword)}%") if keyword.present?
+  }
   validates :name, presence: true,
                     length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -19,6 +31,14 @@ class User < ApplicationRecord
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST:
           BCrypt::Engine.cost
     BCrypt::Password.create(string,cost:cost)
+  end
+  
+  def self.search(search) #self.でクラスメソッドとしている
+    if search # Controllerから渡されたパラメータが!= nilの場合は、titleカラムを部分一致検索
+      Project.where(['name LIKE ?', "%#{search}%"])
+    else
+      Project.all #全て表示。
+    end
   end
   
   # ランダムなトークンを返す
@@ -71,10 +91,31 @@ class User < ApplicationRecord
   end
   
   def feed
-    Micropost.where("user_id = ?", id)
-  end  
-private
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+  end
   
+  # ユーザーをフォローする
+  def follow(other_user)
+    following << other_user
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # 現在のユーザーがフォローしてたらtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
+  end
+  
+ 
+private
+
+
   def downcase_email
    email.downcase!
   end  

@@ -6,18 +6,24 @@
     <%= form_with(model: @user, local: true) do |f| %>
       <%= render 'shared/error_messages', object:f.object %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+       <%= f.label :name,"ユーザーネーム"  %>
+  <%= f.text_field :name, class: 'form-control' %>
+  
+  <%= f.label :user_name, "名前" %>
+  <%= f.text_field :user_name, class: 'form-control' %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+  <%= f.label :email,"メールアドレス" %>
+  <%= f.email_field :email, class: 'form-control' %>
+  
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-
+  <%= f.label :password_confirmation, "Password確認" %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+  
+  <%= link_to "利用規約はこちら", "/about" %>
+      
       <%= f.submit "Create my account", class: "btn btn-primary" %>
     <% end %>
   </div>
